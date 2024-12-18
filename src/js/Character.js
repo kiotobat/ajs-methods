@@ -1,14 +1,19 @@
 export class Character {
   constructor(name, type) {
+    const types = ['Bowman', 'Swordsman', 'Magician', 'Daemon', 'Undead', 'Zombie'];
+
     if (typeof name !== 'string' || name.length < 2 || name.length > 10) {
       throw new Error("Error! The character's name should be a string and contain from 2 to 10 symbols!");
+    } else {
+      this.name = name;
     }
-    if (['Bowman', 'Swordsman', 'Magician', 'Undead', 'Zombie', 'Daemon'].includes(type) !== true) {
-      throw new Error("Error! Such character does not exist!")
+
+    if (!types.includes(type)) {
+      throw new Error('Неизвестное существо');
+    } else {
+      this.type = type;
     }
-    
-    this.name = name;
-    this.type = type;
+
     this.health = 100;
     this.level = 1;
   }
@@ -16,9 +21,10 @@ export class Character {
   levelUp() {
     if (this.health === 0) {
       throw new Error("Whoops! If the health level is 0, it is not possible to increase the level!");
+    } else {
+      this.health = 100;
     }
 
-    this.health = 100;
     this.level += 1;
     this.attack += (this.attack * 20) / 100;
     this.defence += (this.defence * 20) / 100;
